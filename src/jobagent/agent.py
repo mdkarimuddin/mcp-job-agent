@@ -84,6 +84,16 @@ def run_agent(
     return result
 
 
+def require_api_key() -> str | None:
+    """Return an error message if ANTHROPIC_API_KEY is missing or obviously a placeholder, else None."""
+    key = os.environ.get("ANTHROPIC_API_KEY", "")
+    if not key:
+        return "ANTHROPIC_API_KEY is not set. Run: export ANTHROPIC_API_KEY=<your key> (typed in your own shell)."
+    if not key.startswith("sk-ant-") or len(key) < 40 or "..." in key:
+        return "ANTHROPIC_API_KEY looks like a placeholder, not a real key. Paste your real key after the = sign."
+    return None
+
+
 class AnthropicLLM:
     """Adapter for the Anthropic Messages API. Reads ANTHROPIC_API_KEY from the environment."""
 
