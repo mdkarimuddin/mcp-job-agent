@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+.coverage
+coverage.xml
+# Real application data stays local: never commit it
+data/*.db
+data/private/
+.env
